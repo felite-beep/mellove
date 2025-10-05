@@ -1,122 +1,195 @@
+<!--
+  Website Cinta - versi final (anti loop)
+  Fitur:
+  - Password sederhana dengan animasi hati
+  - Redirect ke lovelymello.html setelah benar
+  - Tidak auto-redirect ulang (anti reload loop)
+  - Simpan sesi (opsional) agar tidak perlu login ulang
+-->
+
 <!doctype html>
 <html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="robots" content="noindex,nofollow" />
   <title>Rahasiaku untuk Kamu 💖</title>
   <style>
-    :root{--bg:#fff0f6;--accent:#ff6b9a;--muted:#6b6b6b;--radius:18px}
-    *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;
-      background:radial-gradient(circle at 10% 10%,#fff6fb 0%,var(--bg) 40%,#ffeef6 100%);
-      display:flex;align-items:center;justify-content:center;padding:32px;-webkit-font-smoothing:antialiased}
-    .hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
-    .heart{position:absolute;width:16px;height:16px;transform:translate(-50%,-50%) rotate(45deg);background:var(--accent);border-radius:3px 3px 0 0;opacity:0.85;box-shadow:0 4px 14px rgba(0,0,0,0.06);animation:floatUp linear infinite}
-    .heart:before,.heart:after{content:'';position:absolute;background:var(--accent);width:16px;height:16px;border-radius:50%}
-    .heart:before{top:-8px;left:0} .heart:after{left:8px;top:0}
-    @keyframes floatUp{0%{transform:translate(-50%,100%) scale(0.6) rotate(45deg);opacity:0}10%{opacity:0.9}100%{transform:translate(-50%,-120vh) scale(1.1) rotate(45deg);opacity:0}}
-    .card{position:relative;width:100%;max-width:760px;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.92));border-radius:var(--radius);padding:36px;box-shadow:0 10px 30px rgba(108,34,86,0.08);z-index:1;text-align:center}
-    h1{margin:0 0 8px;font-size:28px;color:#411233} p.lead{margin:0 0 22px;color:var(--muted)}
-    .form{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
-    input[type=password]{padding:12px 14px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);min-width:220px;font-size:16px;outline:none;background:linear-gradient(180deg,#fff,#fff)}
-    button{border:0;padding:12px 16px;border-radius:12px;font-weight:600;cursor:pointer;background:linear-gradient(90deg,#ff7ba6,#ff6b9a);color:white}
+    :root{
+      --bg: #fff0f6;
+      --card: #ffffff;
+      --accent: #ff6b9a;
+      --muted: #6b6b6b;
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(circle at 10% 10%, #fff6fb 0%, var(--bg) 40%, #ffeef6 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Floating hearts background */
+    .hearts {
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:0;
+    }
+    .heart{
+      position:absolute;
+      width:16px; height:16px;
+      transform:translate(-50%,-50%) rotate(45deg);
+      background:var(--accent);
+      border-radius:3px 3px 0 0;
+      opacity:0.85;
+      animation:floatUp linear infinite;
+    }
+    .heart:before, .heart:after{content:'';position:absolute;background:var(--accent);width:16px;height:16px;border-radius:50%}
+    .heart:before{top:-8px;left:0}
+    .heart:after{left:8px;top:0}
+    @keyframes floatUp{
+      0%{transform:translate(-50%,100%) scale(0.6) rotate(45deg);opacity:0}
+      10%{opacity:0.9}
+      100%{transform:translate(-50%,-120vh) scale(1.1) rotate(45deg);opacity:0}
+    }
+
+    /* Card */
+    .card{
+      position:relative;
+      width:100%;
+      max-width:760px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.92));
+      border-radius:var(--radius);
+      padding:36px;
+      box-shadow:0 10px 30px rgba(108, 34, 86, 0.08);
+      z-index:1;
+      text-align:center;
+    }
+
+    h1{margin:0 0 8px;font-size:28px;color:#411233}
+    p.lead{margin:0 0 22px;color:var(--muted)}
+
+    .form{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    input[type=password]{
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,0.06);
+      min-width:220px;
+      font-size:16px;
+      outline:none;
+      background:#fff;
+    }
+    button{
+      border:0;
+      padding:12px 16px;
+      border-radius:12px;
+      font-weight:600;
+      cursor:pointer;
+      background:linear-gradient(90deg,#ff7ba6,#ff6b9a);
+      color:white;
+      box-shadow:0 8px 18px rgba(255,107,154,0.18);
+    }
     .small{font-size:13px;color:var(--muted);margin-top:12px}
-    #secretContent{display:none;margin-top:18px}
-    .reveal{margin-top:20px;padding:22px;border-radius:14px;background:linear-gradient(180deg,rgba(255,245,250,0.95),#fff);box-shadow:0 8px 24px rgba(131,55,90,0.06)}
-    .big-love{font-size:34px;margin:8px 0 0}
-    @media (max-width:480px){h1{font-size:22px}.card{padding:20px}input{min-width:160px}}
+    .hint{color:#9b4666;font-weight:600}
+    @media (max-width:480px){
+      h1{font-size:22px}
+      .card{padding:20px}
+    }
   </style>
 </head>
 <body>
 
   <div class="hearts" aria-hidden="true"></div>
 
-  <main class="card" role="main" aria-live="polite">
+  <main class="card" role="main">
     <h1>Halo Sayang 💕</h1>
-    <p class="lead">Masukkan kata sandi supaya kamu bisa melihat kejutan manis ini. Kalau lupa, ketuk tombol "Hint".</p>
+    <p class="lead">Masukkan kata sandi supaya kamu bisa melihat kejutan manis di baliknya.</p>
 
     <form id="pwForm" class="form" onsubmit="return false;">
       <input id="pw" type="password" placeholder="Masukkan kata sandi..." autocomplete="off" aria-label="kata sandi" />
       <button id="submitBtn" type="button" aria-label="buka">Buka</button>
     </form>
 
-    <div class="small">Tidak yakin? <button id="hintBtn" style="background:none;border:0;color:var(--accent);cursor:pointer;font-weight:700;padding:0">Hint</button></div>
-
-    <div id="secretContent" aria-hidden="true">
-      <div class="reveal">
-        <div style="font-size:18px;color:#4b1334">Selamat! 🎉</div>
-        <div class="big-love">I LOVE U — [NAMA]</div>
-        <p style="margin:10px 0 0;color:var(--muted)">Kamu akan diarahkan ke halaman kejutan.</p>
-      </div>
-    </div>
-
-    <!-- fallback jika JS off -->
-    <noscript style="display:block;margin-top:18px">
-      <div style="padding:12px;border-radius:10px;background:#fff0f4">JavaScript dibutuhkan untuk automasi. Klik <a href="./lovelymello.html">di sini</a> untuk membuka halaman kejutan.</div>
-    </noscript>
-
+    <div class="small">Lupa kata sandi? <button id="hintBtn" style="background:none;border:0;color:var(--accent);cursor:pointer;font-weight:700;padding:0">Hint</button></div>
   </main>
 
   <script>
-    // === Ubah password di sini ===
-    const PASSWORD = 'aminpalingserius'; // <-- ganti sesuai keinginan
-
-    // key session
+    // === Ganti password di sini ===
+    const PASSWORD = 'gantilah-dengan-passwordmu';
     const STORAGE_KEY = 'cinta_access_granted_v1';
+    const redirectUrl = './lovelymello.html';
 
     const pwInput = document.getElementById('pw');
     const submitBtn = document.getElementById('submitBtn');
-    const secret = document.getElementById('secretContent');
     const hintBtn = document.getElementById('hintBtn');
 
+    // Buat animasi hati
     function showHearts(){
       const wrapper = document.querySelector('.hearts');
-      for (let i=0;i<12;i++){
-        const h = document.createElement('div'); h.className='heart';
-        const left = Math.random()*100; const size = 8 + Math.random()*28;
-        h.style.left = left+'%'; h.style.width = size+'px'; h.style.height = size+'px';
-        h.style.animationDuration = (8 + Math.random()*10)+'s'; h.style.top = (90 + Math.random()*20)+'%';
+      for(let i=0;i<14;i++){
+        const h=document.createElement('div');
+        h.className='heart';
+        const left=Math.random()*100;
+        const size=8+Math.random()*28;
+        h.style.left=left+'%';
+        h.style.width=size+'px';
+        h.style.height=size+'px';
+        h.style.animationDuration=(8+Math.random()*10)+'s';
+        h.style.top=(90+Math.random()*20)+'%';
         wrapper.appendChild(h);
       }
     }
+    showHearts();
 
-    // Redirect helper: tampilkan pesan singkat lalu redirect
-    function reveal() {
-      // target redirect
-      const redirectUrl = './lovelymello.html';
-      // simpan sesi
-      try{ localStorage.setItem(STORAGE_KEY, '1'); }catch(e){}
-      // tampilkan pesan singkat (in case user melihat layar), lalu redirect cepat
-      secret.style.display = 'block';
-      secret.setAttribute('aria-hidden','false');
-      setTimeout(()=> { window.location.href = redirectUrl; }, 350);
+    // Fungsi shake input jika salah
+    function deny(){
+      pwInput.style.transition='transform 0.12s';
+      pwInput.style.transform='translateX(-8px)';
+      setTimeout(()=>pwInput.style.transform='translateX(8px)',120);
+      setTimeout(()=>pwInput.style.transform='translateX(0)',240);
     }
 
-    function deny() {
-      const el = pwInput;
-      el.style.transition='transform 0.12s'; el.style.transform='translateX(-8px)';
-      setTimeout(()=>el.style.transform='translateX(8px)',120); setTimeout(()=>el.style.transform='translateX(0)',240);
+    // Redirect ketika benar
+    function reveal(){
+      localStorage.setItem(STORAGE_KEY, '1');
+      window.location.replace(redirectUrl);
     }
 
+    // Tombol submit
     submitBtn.addEventListener('click', ()=>{
       const val = pwInput.value.trim();
-      if (!val) { deny(); return; }
-      if (val === PASSWORD) { reveal(); } else { deny(); }
+      if(!val){deny();return;}
+      if(val === PASSWORD){ reveal(); }
+      else{ deny(); }
     });
 
-    pwInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ submitBtn.click(); } });
+    // Tekan Enter
+    pwInput.addEventListener('keydown', e=>{
+      if(e.key==='Enter'){ submitBtn.click(); }
+    });
 
-    hintBtn.addEventListener('click', ()=>{ alert('Hint: sesuatu yang spesial berkaitan dengan kenangan kita. :)'); });
+    // Hint
+    hintBtn.addEventListener('click', ()=>{
+      alert('Hint: sesuatu yang berkaitan dengan kita 💞');
+    });
 
-    // Jika sudah sukses sebelumnya, otomatis redirect (behaviour tetap sama)
-    if (localStorage.getItem(STORAGE_KEY) === '1') {
-      // kecilkan delay supaya langsung redirect
-      setTimeout(reveal, 80);
-    }
-
-    // buat hearts
-    showHearts();
+    // === Catatan ===
+    // Tidak ada auto-redirect agar tidak menyebabkan loop
+    // Logout di lovelymello.html akan menghapus localStorage
   </script>
 </body>
 </html>
