@@ -191,11 +191,13 @@
     }
 
     function reveal() {
-      secret.style.display='block';
-      secret.setAttribute('aria-hidden', 'false');
+      // Redirect ke halaman lain setelah password benar.
+      // Ubah nilai redirectUrl sesuai target (contoh: './surprise.html' atau 'https://username.github.io/repo/surprise.html')
+      const redirectUrl = './lovelymello.html';
+      // simpan sesi (opsional) supaya kunjungan berikutnya bisa otomatis
       localStorage.setItem(STORAGE_KEY, '1');
-      // sedikit gaya: scroll ke konten
-      setTimeout(()=>{document.querySelector('.reveal').scrollIntoView({behavior:'smooth',block:'center'})},120);
+      // redirect
+      window.location.href = redirectUrl;
     }
 
     function deny() {
