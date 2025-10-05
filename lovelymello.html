@@ -109,11 +109,11 @@
 
     hintBtn.addEventListener('click', ()=>{ alert('Hint: sesuatu yang spesial berkaitan dengan kenangan kita. :)'); });
 
-    // Jika sudah sukses sebelumnya, otomatis redirect (behaviour tetap sama)
-    if (localStorage.getItem(STORAGE_KEY) === '1') {
-      // kecilkan delay supaya langsung redirect
-      setTimeout(reveal, 80);
-    }
+// Jika belum pernah login, arahkan balik ke index
+if (!localStorage.getItem(STORAGE_KEY)) {
+  window.location.href = './index.html';
+}
+
 
     // buat hearts
     showHearts();
