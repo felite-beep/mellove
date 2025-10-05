@@ -1,140 +1,40 @@
-<!--
-  Website Cinta - Single-file template
-  Cara pakai:
-  1. Buka file ini di browser (simpan sebagai .html dan buka).
-  2. Ganti value variabel `PASSWORD` di script di bawah dengan kata sandi yang kamu mau.
-  3. Ubah teks, gambar, atau gaya sesuai keinginan.
-
-  Catatan keamanan: Ini hanya proteksi sisi-klien (untuk surprise/romantis).
-  Jangan gunakan ini untuk menyimpan data sensitif.
--->
-
 <!doctype html>
 <html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
   <title>Rahasiaku untuk Kamu 💖</title>
   <style>
-    :root{
-      --bg: #fff0f6;
-      --card: #ffffff;
-      --accent: #ff6b9a;
-      --muted: #6b6b6b;
-      --glass: rgba(255,255,255,0.55);
-      --radius: 18px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      background: radial-gradient(circle at 10% 10%, #fff6fb 0%, var(--bg) 40%, #ffeef6 100%);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:32px;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-
-    /* Floating heart background */
-    .hearts {
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      overflow:hidden;
-      z-index:0;
-    }
-    .heart{
-      position:absolute;
-      width:16px; height:16px;
-      transform:translate(-50%,-50%) rotate(45deg);
-      background:var(--accent);
-      border-radius:3px 3px 0 0;
-      opacity:0.85;
-      box-shadow:0 4px 14px rgba(0,0,0,0.06);
-      animation:floatUp linear infinite;
-    }
-    .heart:before, .heart:after{content:'';position:absolute;background:var(--accent);width:16px;height:16px;border-radius:50%}
-    .heart:before{top:-8px;left:0}
-    .heart:after{left:8px;top:0}
-    @keyframes floatUp{
-      0%{transform:translate(-50%,100%) scale(0.6) rotate(45deg);opacity:0}
-      10%{opacity:0.9}
-      100%{transform:translate(-50%,-120vh) scale(1.1) rotate(45deg);opacity:0}
-    }
-
-    /* Card */
-    .card{
-      position:relative;
-      width:100%;
-      max-width:760px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.92));
-      border-radius:var(--radius);
-      padding:36px;
-      box-shadow:0 10px 30px rgba(108, 34, 86, 0.08);
-      z-index:1;
-      text-align:center;
-    }
-
-    h1{margin:0 0 8px;font-size:28px;color:#411233}
-    p.lead{margin:0 0 22px;color:var(--muted)}
-
-    .form{
-      display:flex;
-      gap:12px;
-      justify-content:center;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-    input[type=password], input[type=text]{
-      padding:12px 14px;
-      border-radius:12px;
-      border:1px solid rgba(0,0,0,0.06);
-      min-width:220px;
-      font-size:16px;
-      outline:none;
-      background:linear-gradient(180deg, #fff, #fff);
-      box-shadow:inset 0 -6px 14px rgba(255,107,154,0.02);
-    }
-    button{
-      border:0;
-      padding:12px 16px;
-      border-radius:12px;
-      font-weight:600;
-      cursor:pointer;
-      background:linear-gradient(90deg,#ff7ba6,#ff6b9a);
-      color:white;
-      box-shadow:0 8px 18px rgba(255,107,154,0.18);
-    }
+    :root{--bg:#fff0f6;--accent:#ff6b9a;--muted:#6b6b6b;--radius:18px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;
+      background:radial-gradient(circle at 10% 10%,#fff6fb 0%,var(--bg) 40%,#ffeef6 100%);
+      display:flex;align-items:center;justify-content:center;padding:32px;-webkit-font-smoothing:antialiased}
+    .hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+    .heart{position:absolute;width:16px;height:16px;transform:translate(-50%,-50%) rotate(45deg);background:var(--accent);border-radius:3px 3px 0 0;opacity:0.85;box-shadow:0 4px 14px rgba(0,0,0,0.06);animation:floatUp linear infinite}
+    .heart:before,.heart:after{content:'';position:absolute;background:var(--accent);width:16px;height:16px;border-radius:50%}
+    .heart:before{top:-8px;left:0} .heart:after{left:8px;top:0}
+    @keyframes floatUp{0%{transform:translate(-50%,100%) scale(0.6) rotate(45deg);opacity:0}10%{opacity:0.9}100%{transform:translate(-50%,-120vh) scale(1.1) rotate(45deg);opacity:0}}
+    .card{position:relative;width:100%;max-width:760px;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.92));border-radius:var(--radius);padding:36px;box-shadow:0 10px 30px rgba(108,34,86,0.08);z-index:1;text-align:center}
+    h1{margin:0 0 8px;font-size:28px;color:#411233} p.lead{margin:0 0 22px;color:var(--muted)}
+    .form{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
+    input[type=password]{padding:12px 14px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);min-width:220px;font-size:16px;outline:none;background:linear-gradient(180deg,#fff,#fff)}
+    button{border:0;padding:12px 16px;border-radius:12px;font-weight:600;cursor:pointer;background:linear-gradient(90deg,#ff7ba6,#ff6b9a);color:white}
     .small{font-size:13px;color:var(--muted);margin-top:12px}
-    .hint{color:#9b4666;font-weight:600}
-
-    /* Hidden content */
     #secretContent{display:none;margin-top:18px}
-    .reveal{
-      margin-top:20px;
-      padding:22px;border-radius:14px;background:linear-gradient(180deg,rgba(255,245,250,0.95),#fff);
-      box-shadow:0 8px 24px rgba(131, 55, 90, 0.06);
-    }
+    .reveal{margin-top:20px;padding:22px;border-radius:14px;background:linear-gradient(180deg,rgba(255,245,250,0.95),#fff);box-shadow:0 8px 24px rgba(131,55,90,0.06)}
     .big-love{font-size:34px;margin:8px 0 0}
-
-    /* Responsive */
-    @media (max-width:480px){
-      h1{font-size:22px}
-      .card{padding:20px}
-      input{min-width:160px}
-    }
+    @media (max-width:480px){h1{font-size:22px}.card{padding:20px}input{min-width:160px}}
   </style>
 </head>
 <body>
 
   <div class="hearts" aria-hidden="true"></div>
 
-  <main class="card" role="main">
+  <main class="card" role="main" aria-live="polite">
     <h1>Halo Sayang 💕</h1>
-    <p class="lead">Masukkan kata sandi supaya kamu bisa melihat semua kejutan manis ini. Kalau lupa, ketuk tombol "Hint".</p>
+    <p class="lead">Masukkan kata sandi supaya kamu bisa melihat kejutan manis ini. Kalau lupa, ketuk tombol "Hint".</p>
 
     <form id="pwForm" class="form" onsubmit="return false;">
       <input id="pw" type="password" placeholder="Masukkan kata sandi..." autocomplete="off" aria-label="kata sandi" />
@@ -147,101 +47,76 @@
       <div class="reveal">
         <div style="font-size:18px;color:#4b1334">Selamat! 🎉</div>
         <div class="big-love">I LOVE U — [NAMA]</div>
-        <p style="margin:10px 0 0;color:var(--muted)">Buka halaman ini kapan pun kamu mau. Ada pesan, gambar, dan lagu kecil untukmu di sini.</p>
-
-        <!-- Contoh konten yang bisa kamu ganti: gambar, teks, link, music -->
-        <div style="margin-top:14px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap">
-          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='80'><rect rx='14' width='100%' height='100%' fill='%23ffeef6'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%233f1230'>Gambarmu</text></svg>" alt="gambar surprise" style="width:120px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06)" />
-          <button id="playSong" style="padding:10px 12px;border-radius:10px;border:0;background:linear-gradient(90deg,#ffd2e6,#ffb6d1);font-weight:700">Play lagu</button>
-        </div>
+        <p style="margin:10px 0 0;color:var(--muted)">Kamu akan diarahkan ke halaman kejutan.</p>
       </div>
     </div>
+
+    <!-- fallback jika JS off -->
+    <noscript style="display:block;margin-top:18px">
+      <div style="padding:12px;border-radius:10px;background:#fff0f4">JavaScript dibutuhkan untuk automasi. Klik <a href="./lovelymello.html">di sini</a> untuk membuka halaman kejutan.</div>
+    </noscript>
 
   </main>
 
   <script>
     // === Ubah password di sini ===
-    // Ganti nilai berikut dengan kata sandi pilihanmu
-    const PASSWORD = 'gantilah-dengan-passwordmu';
+    const PASSWORD = 'aminpalingserius'; // <-- ganti sesuai keinginan
 
-    // Fitur: simpan sesi di localStorage agar tidak perlu memasukkan ulang
+    // key session
     const STORAGE_KEY = 'cinta_access_granted_v1';
 
     const pwInput = document.getElementById('pw');
     const submitBtn = document.getElementById('submitBtn');
     const secret = document.getElementById('secretContent');
     const hintBtn = document.getElementById('hintBtn');
-    const playSong = document.getElementById('playSong');
 
-    function showHearts() {
+    function showHearts(){
       const wrapper = document.querySelector('.hearts');
-      // buat ~12 hati acak
       for (let i=0;i<12;i++){
-        const h = document.createElement('div');
-        h.className='heart';
-        const left = Math.random()*100;
-        const size = 8 + Math.random()*28;
-        h.style.left = left+'%';
-        h.style.width = size+'px';
-        h.style.height = size+'px';
-        h.style.animationDuration = (8 + Math.random()*10)+'s';
-        h.style.top = (90 + Math.random()*20)+'%';
+        const h = document.createElement('div'); h.className='heart';
+        const left = Math.random()*100; const size = 8 + Math.random()*28;
+        h.style.left = left+'%'; h.style.width = size+'px'; h.style.height = size+'px';
+        h.style.animationDuration = (8 + Math.random()*10)+'s'; h.style.top = (90 + Math.random()*20)+'%';
         wrapper.appendChild(h);
       }
     }
 
+    // Redirect helper: tampilkan pesan singkat lalu redirect
     function reveal() {
-      // Redirect ke halaman lain setelah password benar.
-      // Ubah nilai redirectUrl sesuai target (contoh: './surprise.html' atau 'https://username.github.io/repo/surprise.html')
+      // target redirect
       const redirectUrl = './lovelymello.html';
-      // simpan sesi (opsional) supaya kunjungan berikutnya bisa otomatis
-      localStorage.setItem(STORAGE_KEY, '1');
-      // redirect
-      window.location.href = redirectUrl;
+      // simpan sesi
+      try{ localStorage.setItem(STORAGE_KEY, '1'); }catch(e){}
+      // tampilkan pesan singkat (in case user melihat layar), lalu redirect cepat
+      secret.style.display = 'block';
+      secret.setAttribute('aria-hidden','false');
+      setTimeout(()=> { window.location.href = redirectUrl; }, 350);
     }
 
     function deny() {
-      // get attention
       const el = pwInput;
-      el.style.transition='transform 0.12s';
-      el.style.transform='translateX(-8px)';
-      setTimeout(()=>el.style.transform='translateX(8px)',120);
-      setTimeout(()=>el.style.transform='translateX(0)',240);
+      el.style.transition='transform 0.12s'; el.style.transform='translateX(-8px)';
+      setTimeout(()=>el.style.transform='translateX(8px)',120); setTimeout(()=>el.style.transform='translateX(0)',240);
     }
 
     submitBtn.addEventListener('click', ()=>{
       const val = pwInput.value.trim();
-      if (!val) {deny(); return}
-      if (val === PASSWORD) { reveal(); }
-      else { deny(); }
+      if (!val) { deny(); return; }
+      if (val === PASSWORD) { reveal(); } else { deny(); }
     });
 
-    // tekan enter
-    pwInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ submitBtn.click() } });
+    pwInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ submitBtn.click(); } });
 
-    hintBtn.addEventListener('click', ()=>{
-      // Contoh hint sederhana; ubah sesuai kebutuhan atau hapus
-      alert('Hint: sesuatu yang spesial berkaitan dengan kenangan kita. :)');
-    });
+    hintBtn.addEventListener('click', ()=>{ alert('Hint: sesuatu yang spesial berkaitan dengan kenangan kita. :)'); });
 
-    // Simpan sesi: jika sudah pernah buka, tunjukkan langsung
-    if (localStorage.getItem(STORAGE_KEY) === '1'){
-      reveal();
+    // Jika sudah sukses sebelumnya, otomatis redirect (behaviour tetap sama)
+    if (localStorage.getItem(STORAGE_KEY) === '1') {
+      // kecilkan delay supaya langsung redirect
+      setTimeout(reveal, 80);
     }
-
-    // Play lagu (opsional). User harus klik untuk memulai audio di browser modern.
-    playSong.addEventListener('click', ()=>{
-      // Ganti URL audio ini jika mau – gunakan file mp3 yang Anda host sendiri
-      const url = ''; // contoh: 'assets/lagu.mp3'
-      if (!url){ alert('Belum ada lagu. Letakkan file mp3 dan isi variabel url di script.'); return }
-      const a = new Audio(url);
-      a.play();
-      playSong.innerText='Playing';
-    });
 
     // buat hearts
     showHearts();
-
   </script>
 </body>
 </html>
