@@ -1,50 +1,80 @@
 <!doctype html>
-crypto.getRandomValues(arr);
-return Array.from(arr).map(b => b.toString(16).padStart(2,'0')).join('');
-}
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rahasiaku untuk Kamu 💖</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      margin: 0;
+      color: #fff;
+    }
+    h1 {
+      font-size: 2em;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    input {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      margin-top: 15px;
+      font-size: 1em;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 20px;
+      background-color: #fff;
+      color: #ff6b81;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #ffe5ec;
+    }
+    .error {
+      color: yellow;
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Masukkan Kunci Rahasia 💌</h1>
+  <input type="password" id="password" placeholder="Password..." />
+  <button onclick="checkPassword()">Buka</button>
+  <div id="error" class="error"></div>
 
+  <script>
+    const correctPassword = "melloku"; // 🔐 GANTI password sesuai keinginanmu
 
-async function tryUnlock(){
-const value = pwInput.value || '';
-if(!value) return;
-try{
-const h = await sha256hex(value);
-if(h === storedHash){
-// buat token dan set expiry 1 jam dari sekarang
-const token = makeToken(24);
-const expiry = Date.now() + 60 * 60 * 1000; // 1 jam
-sessionStorage.setItem('love_token', token);
-sessionStorage.setItem('love_token_expiry', String(expiry));
-// opsional: simpan informasi kecil supaya love.html bisa tampil tanpa menanyakan ulang
-sessionStorage.setItem('love_unlocked_at', String(Date.now()));
-// redirect ke halaman pesan
-window.location.href = 'love.html';
-} else {
-pwInput.value = '';
-pwInput.placeholder = 'Salah... coba lagi';
-pwInput.focus();
-}
-}catch(e){console.error(e);}
-}
+    // Cek apakah sudah ada cookie
+    if (document.cookie.includes("loveAccess=true")) {
+      window.location.href = "love.html";
+    }
 
-
-btn.addEventListener('click', tryUnlock);
-pwInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') tryUnlock(); });
-
-
-// Jika sudah punya token valid, langsung redirect
-(function(){
-try{
-const expiry = Number(sessionStorage.getItem('love_token_expiry') || '0');
-if(expiry && expiry > Date.now()){
-window.location.href = 'love.html';
-}
-}catch(e){/* ignore */}
-})();
-
-
-// Petunjuk: untuk menghitung hash baru, buka console browser dan jalankan:
-// (async () => { const pw = 'aminpalingserius'; const h = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw)); console.log(Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('')); })();
-</script>
+    function checkPassword() {
+      const input = document.getElementById("password").value.trim();
+      if (input === correctPassword) {
+        // Simpan cookie 1 jam
+        const now = new Date();
+        now.setTime(now.getTime() + 60 * 60 * 1000);
+        document.cookie = "loveAccess=true; expires=" + now.toUTCString() + "; path=/";
+        window.location.href = "love.html";
+      } else {
+        document.getElementById("error").innerText = "Password salah, coba lagi ya 💔";
+      }
+    }
+  </script>
 </body>
 </html>
