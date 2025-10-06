@@ -1,63 +1,93 @@
 <!doctype html>
-.meta{margin-top:18px;font-size:13px;color:#888}
-.actions{display:flex;gap:10px;justify-content:center;margin-top:18px}
-button{padding:8px 12px;border-radius:10px;border:0;background:var(--accent);color:white;cursor:pointer}
-</style>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Untuk Kamu, Cintaku 💖</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2em;
+      max-width: 600px;
+      margin: 10px auto;
+      line-height: 1.6;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: fall 4s linear infinite;
+    }
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes fall {
+      0% {
+        opacity: 1;
+        transform: translateY(0) rotate(45deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(800px) rotate(45deg);
+      }
+    }
+  </style>
 </head>
 <body>
-<main class="card">
-<div id="content" style="display:none">
-<div class="heart">❤️</div>
-<h1>Untuk Mello — Kusayang Kamu</h1>
-<p>Sayang, setiap detik yang kita lewati — walau terpisah — selalu membuatku bersyukur. Kamu adalah alasan aku tersenyum sebelum tidur, dan alasan aku bangun penuh semangat.</p>
+  <h1>Untuk Kamu, Mello 💞</h1>
+  <p>
+    Aku menulis ini bukan sekadar kata, tapi sebuah janji kecil dalam setiap hurufnya.  
+    Aku ingin kamu tahu, bahkan dari jauh pun cintaku tetap hangat untukmu.  
+    Kamu adalah alasanku tersenyum setiap hari 💖
+  </p>
 
+  <script>
+    // Cegah akses langsung tanpa cookie
+    if (!document.cookie.includes("loveAccess=true")) {
+      window.location.href = "index.html";
+    }
 
-<p>Terima kasih sudah jadi kamu: sabar, lucu, dan selalu mengerti. Aku menunggumu sampai kita bisa memeluk secara nyata lagi.</p>
-
-
-<div class="actions">
-<button id="logoutBtn">Keluar / Logout</button>
-</div>
-
-
-<p class="meta">Halaman ini dilindungi oleh kata sandi yang harus dimasukkan ulang setiap 1 jam.</p>
-</div>
-
-
-<div id="locked" style="display:none">
-<h2>Terkunci</h2>
-<p>Kata sandi belum dimasukkan atau sesi sudah kedaluwarsa. Kamu akan diarahkan kembali ke halaman masukkan password.</p>
-</div>
-</main>
-
-
-<script>
-(function(){
-try{
-const expiry = Number(sessionStorage.getItem('love_token_expiry') || '0');
-const token = sessionStorage.getItem('love_token');
-if(token && expiry && expiry > Date.now()){
-// token valid -> tampilkan konten
-document.getElementById('content').style.display = 'block';
-} else {
-// token hilang atau kadaluarsa -> bersihkan dan redirect ke index
-sessionStorage.removeItem('love_token');
-sessionStorage.removeItem('love_token_expiry');
-sessionStorage.removeItem('love_unlocked_at');
-document.getElementById('locked').style.display = 'block';
-// beri waktu singkat supaya pesan terlihat, lalu redirect
-setTimeout(()=>{ window.location.href = 'index.html'; }, 2000);
-}
-}catch(e){ console.error(e); window.location.href = 'index.html'; }
-
-
-document.getElementById('logoutBtn').addEventListener('click', ()=>{
-sessionStorage.removeItem('love_token');
-sessionStorage.removeItem('love_token_expiry');
-sessionStorage.removeItem('love_unlocked_at');
-window.location.href = 'index.html';
-});
-})();
-</script>
+    // Animasi hati jatuh
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+  </script>
 </body>
 </html>
