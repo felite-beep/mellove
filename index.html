@@ -16,10 +16,11 @@
       overflow: hidden;
     }
 
-    .container {
-      position: relative;
-      text-align: center;
-    }
+.container {
+  position: relative;
+  text-align: center;
+  margin-top: 60px; /* turunkan seluruh isi container */
+}
 
     img {
       width: 480px;
@@ -38,7 +39,7 @@
     /* gelembung bicara dari pria */
     .speech {
       position: absolute;
-      top: -50px; /* naik sedikit di atas kepala pria */
+      top: 20px; /* naik sedikit di atas kepala pria */
       left: 13%;
       background: #fff;
       color: #444;
@@ -111,9 +112,9 @@
       100% { opacity: 0; transform: translate(-50%, -40px); }
     }
 
-    .top-text {
+.top-text {
   position: absolute;
-  top: -40px; /* adjust as needed */
+  top: 20px; /* agak turun dari tepi atas layar */
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.2rem;
