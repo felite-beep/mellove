@@ -7,7 +7,7 @@
   <style>
     body {
       margin: 0;
-      background: radial-gradient(circle at top, #fff5f6 0%, #fde9ef 100%);
+      background: radial-gradient(circle at top, #fff5f7 0%, #fde9ef 100%);
       font-family: 'Poppins', sans-serif;
       display: flex;
       justify-content: center;
@@ -32,70 +32,26 @@
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+      50% { transform: translateY(-6px); }
     }
 
-    /* gelembung dialog */
-    .bubble {
-      position: absolute;
-      background: #fff;
-      padding: 10px 18px;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 1rem;
-      color: #444;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      animation: popIn 1s ease forwards;
-      z-index: 2;
-    }
-
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    /* ekor bubble kiri */
-    .bubble.left::after {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      left: 25px;
-      width: 0;
-      height: 0;
-      border: 10px solid transparent;
-      border-top-color: #fff;
-    }
-
-    /* ekor bubble kanan */
-    .bubble.right::after {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      right: 25px;
-      width: 0;
-      height: 0;
-      border: 10px solid transparent;
-      border-top-color: #fff;
-    }
-
-    /* posisi bubble */
-    .bubble.left {
-      top: -80px;
-      left: 10%;
-    }
-
-    .bubble.right {
-      top: -80px;
-      right: 10%;
-    }
-
-    /* animasi mengetik */
+    /* teks animasi mengetik */
     .typing {
-      display: inline-block;
-      border-right: 3px solid #666;
+      position: absolute;
+      top: -70px; /* posisi di atas kepala pria */
+      left: 22%;  /* posisikan lebih ke kiri, di atas pria */
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      background: rgba(0,0,0,0.4);
+      padding: 8px 14px;
+      border-radius: 16px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
       white-space: nowrap;
+      border-right: 3px solid #fff;
       overflow: hidden;
       animation: typing 3s steps(30, end), blink 0.8s infinite;
+      z-index: 2;
     }
 
     @keyframes typing {
@@ -107,24 +63,13 @@
       50% { border-color: transparent; }
     }
 
-    /* getar lembut untuk teks marah */
-    .shake {
-      animation: shake 0.5s ease-in-out 2s 2;
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-3px); }
-      75% { transform: translateX(3px); }
-    }
-
-    /* dekorasi hati kecil */
+    /* hati melayang */
     .hearts {
       position: absolute;
       bottom: 100px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       color: #ff9eb6;
       opacity: 0;
       animation: heartFloat 3s ease-in-out infinite;
@@ -154,26 +99,24 @@
 
     @media (max-width: 500px) {
       img { width: 90vw; }
-      .bubble { font-size: 0.9rem; padding: 8px 14px; }
-      .bubble.left { top: -70px; left: 5%; }
-      .bubble.right { top: -70px; right: 5%; }
+      .typing {
+        top: -60px;
+        left: 20%;
+        font-size: 1rem;
+        padding: 6px 10px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- gelembung dialog pria -->
-    <div class="bubble left">
-      <span class="typing">Maaf ya ayaang...</span>
-    </div>
+    <!-- teks animasi mengetik -->
+    <div class="typing">Maaf ya ayaang...</div>
 
-    <!-- gelembung dialog wanita -->
-    <div class="bubble right shake">
-      <span class="typing" style="animation-delay:1.5s;">Hmph!</span>
-    </div>
-
+    <!-- gambar utama -->
     <img src="sorry.png" alt="Minta Maaf">
 
+    <!-- hati kecil lembut -->
     <div class="hearts">💖 💕 💗</div>
   </div>
 
