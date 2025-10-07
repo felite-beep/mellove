@@ -3,78 +3,89 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Rahasiaku untuk Kamu 💖</title>
+  <title>Maaf ya ayaang 💛</title>
   <style>
     body {
-      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: linear-gradient(to bottom right, #fef6e4, #fce1e4);
+      font-family: 'Poppins', sans-serif;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
-      margin: 0;
-      color: #fff;
+      overflow: hidden;
     }
-    h1 {
-      font-size: 2em;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+
+    .container {
+      position: relative;
+      text-align: center;
     }
-    input {
-      padding: 10px 15px;
-      border: none;
-      border-radius: 20px;
-      outline: none;
-      margin-top: 15px;
-      font-size: 1em;
+
+    img {
+      width: 500px;
+      max-width: 90vw;
+      height: auto;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      animation: float 3s ease-in-out infinite;
     }
-    button {
-      padding: 10px 20px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 20px;
-      background-color: #fff;
-      color: #ff6b81;
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .text-left, .text-right {
+      position: absolute;
+      color: #444;
+      font-size: 1rem;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+      animation: fadeInUp 1.5s ease both;
+    }
+
+    .text-left {
+      top: 20%;
+      left: 25%;
+      animation-delay: 0.5s;
+    }
+
+    .text-right {
+      top: 20%;
+      right: 25%;
+      animation-delay: 1s;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      color: #555;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    footer span {
+      color: #e67a7a;
       font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover {
-      background-color: #ffe5ec;
-    }
-    .error {
-      color: yellow;
-      margin-top: 10px;
-      font-size: 0.9em;
     }
   </style>
 </head>
 <body>
-  <h1>Masukkan Kunci Rahasia 💌</h1>
-  <input type="password" id="password" placeholder="Password..." />
-  <button onclick="checkPassword()">Buka</button>
-  <div id="error" class="error"></div>
+  <div class="container">
+    <div class="text-left">Maaf ya ayaang...</div>
+    <div class="text-right">Hmph!</div>
+    <img src="sorry.png" alt="Minta Maaf">
+  </div>
 
-  <script>
-    const correctPassword = "melloku"; // 🔐 GANTI password sesuai keinginanmu
-
-    // Cek apakah sudah ada cookie
-    if (document.cookie.includes("loveAccess=true")) {
-      window.location.href = "love.html";
-    }
-
-    function checkPassword() {
-      const input = document.getElementById("password").value.trim();
-      if (input === correctPassword) {
-        // Simpan cookie 1 jam
-        const now = new Date();
-        now.setTime(now.getTime() + 60 * 60 * 1000);
-        document.cookie = "loveAccess=true; expires=" + now.toUTCString() + "; path=/";
-        window.location.href = "love.html";
-      } else {
-        document.getElementById("error").innerText = "Password salah, coba lagi ya 💔";
-      }
-    }
-  </script>
+  <footer>
+    Dari aku yang selalu sayang kamu 💞 <span>— maaf ya...</span>
+  </footer>
 </body>
 </html>
