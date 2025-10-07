@@ -7,7 +7,7 @@
   <style>
     body {
       margin: 0;
-      background: linear-gradient(to bottom right, #fef6e4, #fce1e4);
+      background: linear-gradient(to bottom right, #fff6f6, #fde9e9);
       font-family: 'Poppins', sans-serif;
       display: flex;
       justify-content: center;
@@ -26,7 +26,6 @@
       max-width: 90vw;
       height: auto;
       border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
       animation: float 3s ease-in-out infinite;
     }
 
@@ -35,30 +34,71 @@
       50% { transform: translateY(-6px); }
     }
 
-    .text-left, .text-right {
+    /* gelembung teks */
+    .bubble {
       position: absolute;
-      color: #fff;
-      font-size: 1.1rem;
+      background: rgba(255,255,255,0.9);
+      border-radius: 20px;
+      padding: 10px 16px;
+      font-size: 1rem;
       font-weight: 600;
-      text-shadow: 0 0 6px rgba(0,0,0,0.8);
-      animation: fadeInUp 1.5s ease both;
+      color: #333;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      max-width: 150px;
+      text-align: center;
+      animation: fadeIn 0.8s ease forwards;
     }
 
-    .text-left {
-      top: 10%;
-      left: 25%;
-      animation-delay: 0.5s;
+    /* posisi gelembung */
+    .left-bubble {
+      top: -20%;
+      left: 15%;
     }
 
-    .text-right {
-      top: 10%;
-      right: 25%;
-      animation-delay: 1s;
+    .right-bubble {
+      top: -20%;
+      right: 15%;
     }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* ekor gelembung */
+    .bubble::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 20px;
+      width: 0;
+      height: 0;
+      border: 8px solid transparent;
+      border-top-color: rgba(255,255,255,0.9);
+    }
+
+    .right-bubble::after {
+      left: auto;
+      right: 20px;
+    }
+
+    /* efek muncul */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* animasi mengetik */
+    .typing {
+      display: inline-block;
+      border-right: 3px solid #555;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 3s steps(30, end), blink 0.8s infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
     }
 
     footer {
@@ -66,21 +106,38 @@
       bottom: 20px;
       width: 100%;
       text-align: center;
-      color: #555;
+      color: #666;
       font-size: 0.9rem;
-      opacity: 0.8;
     }
 
     footer span {
       color: #e67a7a;
       font-weight: bold;
     }
+
+    @media (max-width: 500px) {
+      .bubble {
+        font-size: 0.9rem;
+        max-width: 120px;
+      }
+      .left-bubble { left: 10%; top: -18%; }
+      .right-bubble { right: 10%; top: -18%; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="text-left">Maaf ya ayaang...</div>
-    <div class="text-right">Hmph!</div>
+    <!-- gelembung teks kiri -->
+    <div class="bubble left-bubble">
+      <span class="typing">Maaf ya ayaang...</span>
+    </div>
+
+    <!-- gelembung teks kanan -->
+    <div class="bubble right-bubble">
+      <span class="typing" style="animation-delay:1.5s;">Hmph!</span>
+    </div>
+
+    <!-- gambar utama -->
     <img src="sorry.png" alt="Minta Maaf">
   </div>
 
