@@ -39,7 +39,7 @@
     /* gelembung bicara dari pria */
     .speech {
       position: absolute;
-      top: 20px; /* naik sedikit di atas kepala pria */
+      top: -40px; /* naik sedikit di atas kepala pria */
       left: 13%;
       background: #fff;
       color: #444;
@@ -112,25 +112,6 @@
       100% { opacity: 0; transform: translate(-50%, -40px); }
     }
 
-.top-text {
-  position: absolute;
-  top: 20px; /* agak turun dari tepi atas layar */
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #e46b86;
-  text-align: center;
-  animation: fadeIn 1s ease forwards;
-  opacity: 0;
-  z-index: 3;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 
     footer {
       position: absolute;
@@ -162,10 +143,6 @@
 </head>
 <body>
   <div class="container">
-<!-- Text on top -->
-<div class="top-text">
-  Still yours 💖, and truly sorry 🙏
-</div>
     <!-- Gelembung bicara dari pria -->
     <div class="speech">
       <span class="typing">Maaf ya ayaang...</span>
@@ -179,7 +156,7 @@
   </div>
 
   <footer>
-    Dari aku yang selalu sayang kamu <span>💞 maaf ya...</span>
+    <span>Still yours 💖</span>, and truly sorry 🙏
   </footer>
 </body>
 </html>
