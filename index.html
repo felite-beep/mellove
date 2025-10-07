@@ -111,6 +111,26 @@
       100% { opacity: 0; transform: translate(-50%, -40px); }
     }
 
+    .top-text {
+  position: absolute;
+  top: -40px; /* adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #e46b86;
+  text-align: center;
+  animation: fadeIn 1s ease forwards;
+  opacity: 0;
+  z-index: 3;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
     footer {
       position: absolute;
       bottom: 15px;
@@ -141,9 +161,10 @@
 </head>
 <body>
   <div class="container">
-    <div class="message">
-      <span>Still yours 💖, and truly sorry 🙏</span>
-    </div>
+<!-- Text on top -->
+<div class="top-text">
+  Still yours 💖, and truly sorry 🙏
+</div>
     <!-- Gelembung bicara dari pria -->
     <div class="speech">
       <span class="typing">Maaf ya ayaang...</span>
